@@ -29,6 +29,15 @@ app.get('/', (req, res) => {
   })  
 })
 
+app.get('/list', (req, res) => {
+  const sql = "SELECT * FROM board";
+  db.query(sql, (err, result) => {
+    if (err) throw err;  
+    res.send(result);
+  })  
+})
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
