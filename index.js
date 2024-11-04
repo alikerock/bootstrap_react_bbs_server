@@ -20,6 +20,7 @@ const db = mysql.createConnection({
 
 db.connect()
 
+/*
 app.get('/', (req, res) => {
   const sql = "INSERT INTO requested (rowno) VALUES (1)";
   db.query(sql, (err, rows, fields) => {
@@ -28,9 +29,10 @@ app.get('/', (req, res) => {
     console.log('데이터 추가 성공')
   })  
 })
+*/
 
 app.get('/list', (req, res) => {
-  const sql = "SELECT * FROM board";
+  const sql = "SELECT BOARD_ID, BOARD_TITLE, REGISTER_ID, DATE_FORMAT(REGISTER_DATE , '%Y-%m-%d') AS REGISTER_DATE FROM board";
   db.query(sql, (err, result) => {
     if (err) throw err;  
     res.send(result);
