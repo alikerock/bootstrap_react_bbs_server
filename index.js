@@ -65,7 +65,6 @@ app.post('/insert', (req, res) => {
 })
 
 app.post('/update', (req, res) => {
-
   // let title = req.body.title;
   // let content = req.body.content;
   // let id = req.body.id;
@@ -73,6 +72,17 @@ app.post('/update', (req, res) => {
 
   const sql = "UPDATE board SET BOARD_TITLE=?, BOARD_CONTENT=? WHERE BOARD_ID=?";
   db.query(sql, [title, content, id], (err, result) => {
+    if (err) throw err;  
+    res.send(result);
+  })  
+})
+
+app.post('/delete', (req, res) => {
+  //const boardIDList = req.body.boardIDList;
+  const {boardIDList} = req.body;
+
+  const sql = `DELETE FROM board WHERE BOARD_ID in (${boardIDList})`;
+  db.query(sql, (err, result) => {
     if (err) throw err;  
     res.send(result);
   })  
