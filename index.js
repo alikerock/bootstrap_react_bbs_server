@@ -64,6 +64,20 @@ app.post('/insert', (req, res) => {
   })  
 })
 
+app.post('/update', (req, res) => {
+
+  // let title = req.body.title;
+  // let content = req.body.content;
+  // let id = req.body.id;
+  const {id, title, content} = req.body;
+
+  const sql = "UPDATE board SET BOARD_TITLE=?, BOARD_CONTENT=? WHERE BOARD_ID=?";
+  db.query(sql, [title, content, id], (err, result) => {
+    if (err) throw err;  
+    res.send(result);
+  })  
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
